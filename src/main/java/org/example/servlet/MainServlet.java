@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.stream.Stream;
 
 
 @WebServlet("/files")
@@ -22,6 +23,7 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        /*
         String path;
         String param = req.getParameter("path");
         String defParam = System.getProperty("user.home");
@@ -31,6 +33,22 @@ public class MainServlet extends HttpServlet {
         }
         else {
             path = param;
+        }
+        */
+        HttpSession session = req.getSession(true);
+        Object login = session.getAttribute("login");
+        System.out.println(login);
+
+        String l = login.toString();
+        System.out.println(l);
+        String path = req.getParameter("path");
+        File root = new File("C:\\Users\\Olga\\Desktop\\noname");
+        if (path == null) {
+            path = findDir(root,login);
+        }
+        if (path == null) {
+            Path pathNew = Files.createDirectories(Paths.get("C:\\Users\\Olga\\Desktop\\noname\\"+l+"\\"));
+            path = pathNew.toAbsolutePath().toString();
         }
 
         req.setAttribute("path", path);
@@ -47,13 +65,16 @@ public class MainServlet extends HttpServlet {
             req.getRequestDispatcher("MainJSP.jsp").forward(req, resp);
         }
     }
-    private String  searchDir(File root, Object login){
+    private String  findDir(File root, Object login){
         String res = null;
         if(root.isDirectory()){
             File[] dirFiles = root.listFiles();
             for(File f : dirFiles){
-                if(f.isDirectory() && f.getName().equals(login)) {
-                    res = f.getPath();
+                if(f.isDirectory()) {
+                    if (f.getName().equals(login)){
+                        res = f.getPath();
+                    }
+
                     return res;
                 }
             }

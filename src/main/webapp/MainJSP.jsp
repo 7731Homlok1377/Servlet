@@ -23,17 +23,26 @@
  border:3px #AA98A8  solid;
  }
 
+ .logout-form {
+         position: fixed;
+         right: 8px;
+         top: 8px;
+       }
+
 </style >
 <title>Кошки правят миром</title>
+
 <p class="italic" style= "background: #FFFFFF; border:3px #AA98A8  solid" face="Arial">Котодень: <%=(new java.util.Date()).toLocaleString()%></p>
 </head>
 <body>
+
 <br>
     <form action="./files" method="get" >
     <button type="submit" name="path" value=${parents} >
     <span class="Text" style= "font-size: 140%"><img src="https://img.icons8.com/ios-glyphs/256/circled-chevron-up.png" width="40" height="40">Вверх</span>
 
     </button>
+
     </form>
     <h1>
     <span class="pathText" style= "background: #FFFFFF; border:3px #AA98A8  solid">${path}</span>
@@ -82,5 +91,11 @@
         </c:forEach>
         </tbody>
     </table>
+    </button>
+        <div class="logout-form">
+            <form action="./files/exit"  method="post" accept-charset="UTF-8">
+                <button type="submit" class="btn btn-primary btn-block">
+                    Выход
+                </button>
 </body>
 </html>

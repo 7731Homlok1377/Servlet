@@ -14,7 +14,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #000;
+            background-color: #AA98A8;
             padding-bottom: 100px;
         }
         .form{
@@ -22,7 +22,7 @@
       	    top: 50%;
       	    left: 50%;
       	    transform: translate(-50%,-50%);
-      	    background: rgba(0,0,0,.7);
+      	    background: #d171a4;
         }
         .form h1 {
             font: 300 60px 'Oswald', sans-serif;
